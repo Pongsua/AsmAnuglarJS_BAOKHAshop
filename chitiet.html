@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Chi tiết</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css" />
+</head>
+<style>
+    * {
+        font-family: "Brandon Text", sans-serif !important;
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+    .btn-icon {
+        width: 30px;
+    }
+
+    .btnsize {
+        width: 60px;
+    }
+
+    .mota>div>span {
+        font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+        font-size: 14px;
+    }
+
+    .btn-black {
+        background-color: black;
+        color: white;
+    }
+</style>
+
+<body>
+
+    <div class="container-xl px-5 mt-5">
+
+        <div class="row d-flex">
+            <div class="col-xl-6 col-md-6">
+                <div class="d-flex justify-content-center">
+                    <img  src="{{dataAnh[index].anh}}" alt="" class="img-fluid" />
+                </div>
+                <div class="d-flex justify-content-between">
+
+                    <img src="{{dataAnh[index].thumnails1}}" alt="" class="img-fluid col-2 border border mt-2 p-1"
+                        style="width: 16%; object-fit: cover" />
+                    <img src="{{dataAnh[index].thumnails2}}" alt="" class="img-fluid col-2 border border mt-2 p-1"
+                        style="width: 16%; object-fit: cover" />
+                    <img src="{{dataAnh[index].thumnails3}}" alt="" class="img-fluid col-2 border border mt-2 p-1"
+                        style="width: 16%; object-fit: cover" />
+                    <img src="{{dataAnh[index].thumnails4}}" alt="" class="img-fluid col-2 border border mt-2 p-1"
+                        style="width: 16%; object-fit: cover" />
+                    <img src="{{dataAnh[index].thumnails5}}" alt="" class="img-fluid col-2 border border mt-2 p-1"
+                        style="width: 16%; object-fit: cover" />
+                    <img src="{{dataAnh[index].thumnails6}}" alt="" class="img-fluid col-2 border border mt-2 p-1"
+                        style="width: 16%; object-fit: cover" />
+
+                </div>
+
+            </div>
+            <div class="col-xl-6 col-md-6">
+                <h4 class="fw-bold text-info">{{dataAnh[index].title}}</h4>
+                <span style="font-size: 15px;" class="text-muted">SKU: TC0024.{{dataAnh[index].id}}</span>
+                <div>
+                    <span><i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-fill text-warning"></i>
+                        <i class="bi bi-star-half text-warning"></i>
+                        (4.9)
+                    </span>
+                </div>
+                <hr>
+                <div class="d-flex align-items-center gap-4">
+                    <div class="bg-secondary bg-opacity-25 text-danger px-3 py-2">-{{ (dataAnh[index].giaCu -
+                        dataAnh[index].giaMoi ) / dataAnh[index].giaCu * 100 }}%</div>
+                    <span class="fw-bold fs-5">{{dataAnh[index].giaMoi | number: 0}}<sup>đ</sup></span>
+                    <span
+                        class="text-dark text-opacity-75 text-decoration-line-through ">{{dataAnh[index].giaCu | number: 0}}<sup>đ</sup></span>
+                </div>
+                <hr>
+                <h6 class="ms-1">Hướng dẫn chọn size</h6>
+                <button class="btn btn-outline-secondary">
+                    <a class="nav-link active" aria-current="page" href="#" data-bs-toggle="modal"
+                        data-bs-target="#chonSize">
+                        Bản quy đổi kích cỡ</a></button>
+
+                <hr>
+                <h6 class="ms-1">Kích cỡ</h6>
+                <div class="d-flex gap-2 mt-3">
+
+
+                    <!-- <button class="btn border btn-outline-dark border-2 p-1 pe-2 fw-bold btnsize">
+                        M
+                    </button>
+                    <button class="btn border btn-outline-dark border-2 p-1 pe-2 fw-bold btnsize">
+                        L
+                    </button>
+                    <button class="btn border btn-outline-dark border-2 p-1 pe-2 fw-bold btnsize">
+                        XL
+                    </button> -->
+                    <button class="btn border btn-outline-dark border-2 p-1 pe-2 fw-bold btnsize"
+                        ng-class="{ 'btn-black': selectedSize === 'M' }" ng-click="setSize('M')">
+                        M
+                    </button>
+                    <button class="btn border btn-outline-dark border-2 p-1 pe-2 fw-bold btnsize"
+                        ng-class="{ 'btn-black': selectedSize === 'L' }" ng-click="setSize('L')">
+                        L
+                    </button>
+                    <button class="btn border btn-outline-dark border-2 p-1 pe-2 fw-bold btnsize"
+                        ng-class="{ 'btn-black': selectedSize === 'XL' }" ng-click="setSize('XL')">
+                        XL
+                    </button>
+
+
+                </div>
+                <hr>
+
+                <div class="d-flex gap-4" ng-init="soluong = 1">
+                    <input ng-model="soluong" id="" min="0" name="" value="1" type="number"
+                        class="fs-6 w-25 form-control form-control-sm text-center">
+                    <button class=" btn btn-dark px-5 py-2 rounded rounded-5" ng-click="them(dataAnh[index].id)">Thêm vào giỏ</button>
+                </div>
+                <hr>
+                <div class="mota d-flex justify-content-between">
+                    <div>
+                        <span class="fw-bold text-info">Mô tả</span> <br>
+                        <span> {{dataAnh[index].title}}</span><br>
+                        <span> MATERIAL: TICI SPANDEX</span><br>
+                        <span> SIZE: M / L / XL</span><br>
+
+                    </div>
+                    <div class="pt-3">
+                        <span> Size và form áo được đo theo chuẩn của người Việt Nam</span><br>
+                        <span> Nên chọn size lớn hơn nếu bạn thích mặc thoải mái</span><br>
+                        <span> Size M: Chiều cao từ 1m50 – 1m65, cân nặng dưới 60kg</span><br>
+                        <span> Size L: Chiều cao từ 1m65 – 1m72, cân nặng dưới 65kg</span><br>
+                        <span> Size XL: Chiều cao từ 1m70 – 1m77, cân nặng dưới 80kg</span><br>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+        <hr>
+
+        <div class="my-5">
+
+            <h1 class="ke position-relative text-center text-uppercase mt-5 mb-5   text-primary text-opacity-75">
+                SẢN PHẨM LIÊN QUAN
+            </h1>
+            <div class="container-xl">
+                <div class="row px-5" id="showSanPhamTShirt">
+                    <div class="col-sm-6 col-lg-3 col-md-4 my-2 "
+                        ng-repeat="item in dataAnh | filter : { kieuAo: dataAnh[index].kieuAo }">
+                        <div class="shadow p-2 position-relative overflow-hidden ">
+                            <img src="{{item.anh}}" class="img-fluid" />
+                            <div class="name text-center"><span class="fw-bold">{{item.title}}</span> </div>
+                            <div class="name text-center"><span
+                                    class="fw-light text-decoration-line-through">{{item.giaCu}}<sup>đ</sup></span>
+                                <span class="fw-bold">{{item.giaMoi}}<sup>đ</sup></span>
+                            </div>
+                            <center>
+                                <a href="#!sanpham/{{item.id}}"><button class="btn btn-outline-danger btn-sm  my-2">Xem
+                                        sản
+                                        phẩm</button></a>
+                            </center>
+                            <span class="onsale">
+                                SALE!
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    
+
+    </div>
+
+
+
+
+
+
+</body>
+
+</html>

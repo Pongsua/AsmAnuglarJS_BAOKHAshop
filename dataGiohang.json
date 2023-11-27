@@ -1,0 +1,22 @@
+{
+    "listGioHang": [
+        {
+            "id": "0",
+            "title": "AIRCRAFT FOCUS TEE",
+            "anh": "./img/anh1.webp",
+            "giaCu": 180000,
+            "giaMoi": 99000,
+            "size" : "M", 
+            "soLuong" : 2
+         },
+         {
+            "id": "18",
+            "title": "ROSE SHIRT",
+            "anh": "./img/shirt7.webp",
+            "giaCu": 290000,
+            "giaMoi": 116000,
+            "size" : "L", 
+            "soLuong" : 3
+        }
+    ]
+}
